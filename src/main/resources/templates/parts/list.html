@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default">
+<head>
+    <title>List Book</title>
+    <link layout:fragment="pageStyleLink" rel="stylesheet" th:href="@{'/css/list.css'}" />
+</head>
+<body>
+
+<li class="nav-item" layout:fragment="newBook">
+    <a class="nav-item nav-link" th:href="@{'/parts/add'}">Новое комплектующие</a>
+</li>
+
+<th:block layout:fragment="searchForm">
+    <form th:replace="fragments/filters :: search(${title})"></form>
+</th:block>
+<div layout:fragment="content" class="py-5 bg-light">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row align-items-center">
+            <h1 class="mr-auto">Список комплектующих</h1>
+            <th:block th:if="${parts.getTotalPages()} > 1">
+                <div th:replace="fragments/pagination :: pagination(${parts})"></div>
+            </th:block>
+        </div>
+        <hr/>
+        <div class="d-flex flex-column flex-md-row align-items-center mb-3">
+            <div class="mr-auto">
+                <div class="form-row">
+                    <div class="form-inline">
+                        <div th:replace="fragments/filters :: required(${required})"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="d-flex flex-column flex-md-row align-items-center mb-3">
+                <div class="mr-auto">
+
+                    <table>
+                        <tr>
+                            <th>Наименование</th>
+                            <th>Необходимость</th>
+                            <th>Количество</th>
+                        </tr>
+                        <tr th:each="part : ${parts}" >
+
+
+                            <td th:text="${part.title}"></td>
+
+                            <td> <span th:if="${part.must}">
+                                да<i class="fa fa-bullseye fa-2x" style="color:green; text-align: center;" aria-hidden="true"></i>
+                            </span>
+                                <span th:if="${!part.must}">
+                                нет<i class="fa fa-bullseye fa-2x"  style="text-align: center;" aria-hidden="true"></i>
+                            </span></td>
+                            <td th:text="${part.getAmount()}"></td>
+                            <td>
+                                <a th:href="@{'/parts/' + ${part.id}}">Просмотр</a>
+                            </td>
+                            <td>
+                                <a th:href="@{'/delete/'+${part.id}}" class="btn btn-danger">Удалить</a>
+                            </td>
+
+
+                        </tr>
+                        <tr>
+                            <th>Можно собрать </th>
+                            <th th:text="${minObject.getAmount()}"></th>
+                            <th>компьютеров</th>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

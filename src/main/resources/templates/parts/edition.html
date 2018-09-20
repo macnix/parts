@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default">
+
+<head>
+    <title th:text="${part.getTitle()}"></title>
+</head>
+
+<body>
+
+<li class="nav-item" layout:fragment="newBook">
+    <a class="nav-item nav-link" th:href="@{'/parts/add'}">Новое комплектующее</a>
+</li>
+
+<div layout:fragment="content" class="py-5">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-8">
+                <h1 th:inline="text">наименование: [[${part.title}]]</h1>
+
+                <h3 th:if="${part.must}">необходимость: да<i class="text-muted"></i>
+                </h3>
+                <h3 th:if="${!part.must}">необходимость: нет<i class="text-muted"></i>
+                </h3>
+                <h3 th:inline="text">количество: [[${part.amount}]]</h3>
+                <hr/>
+                <form th:replace="fragments/forms :: part(${part}, 'edition')"></form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

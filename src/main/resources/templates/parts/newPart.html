@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default">
+
+<head>
+    <title th:text="${'Новое комплектующее'}"></title>
+</head>
+
+<body>
+
+<div layout:fragment="content" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h3 th:text="${'Новое комплектующее'}" class="page-header h3"></h3>
+                <hr/>
+                <form th:replace="fragments/forms :: part(${part}, 'new')"></form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
