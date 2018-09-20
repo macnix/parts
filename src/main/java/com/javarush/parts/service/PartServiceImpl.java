@@ -5,7 +5,6 @@ import com.javarush.parts.model.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,12 +14,12 @@ import java.util.Optional;
 /**
  * @author dubetskyi_ov on 17.09.2018
  */
-@Component
+
 @Service("partService")
 @Repository
 @Transactional
 
-public abstract class PartServiceImpl implements PartService {
+public  class PartServiceImpl implements PartService {
     @Autowired
     private PartRepository partRepository;
 
@@ -70,6 +69,11 @@ public abstract class PartServiceImpl implements PartService {
     @Override
     public Page<Part> search(String term, boolean isMust, Pageable pageable) {
         return partRepository.findBySearchParamsAndIsMust(term, isMust, pageable);
+    }
+
+    @Override
+    public void delete(Part part) {
+        partRepository.delete (part);
     }
 
 

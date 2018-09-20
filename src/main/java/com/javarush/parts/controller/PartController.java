@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author dubetskyi_ov on 13.09.2018
@@ -27,9 +28,9 @@ import java.util.Optional;
 @RequestMapping(path = "/parts")
 public class PartController {
 
-  //  @Autowired
-    ///@Qualifier("partService")
-    @Resource(name="partService")
+  @Autowired
+   // @Qualifier("partService")
+   // @Resource(name="partService")
     private PartService partService;
 
 
@@ -48,7 +49,7 @@ public class PartController {
 
         //Нумерация страниц для Spring Data JPA начинается с 0
         Integer pageNumber = (page > 0) ? page - 1 : 0;
-        PageRequest pageRequest = new PageRequest(pageNumber, 8, sort);
+        PageRequest pageRequest = new PageRequest(pageNumber, 10, sort);
 
         Page<Part> parts;
         Part minObject;
@@ -134,6 +135,17 @@ public class PartController {
         partService.update(book, id);
         redirectAttributes.addAttribute("id", id);
         return "redirect:/parts/{id}";
+    }
+
+    @GetMapping(path = "/delete/{id}")
+    public String deleteBook(@PathVariable Long id){
+        Optional<Part> part = partService.findById(id);
+        if (part.isPresent()) {
+
+
+            partService.delete (part.get ());
+        }
+            return  "redirect:/parts";
     }
 
 }

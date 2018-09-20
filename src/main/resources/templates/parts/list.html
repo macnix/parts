@@ -60,10 +60,13 @@
                             </span></td>
                             <td th:text="${part.getAmount()}"></td>
                             <td>
-                                <a th:href="@{'/parts/' + ${part.id}}">Просмотр</a>
+                                <a th:href="@{'/parts/' + ${part.id}}" class="btn btn-info">Просмотр</a>
                             </td>
                             <td>
-                                <a th:href="@{'/delete/'+${part.id}}" class="btn btn-danger">Удалить</a>
+                                <a th:href="@{'/parts/edition/' + ${part.id}}" class="btn btn-outline-info">Редактировать</a>
+                            </td>
+                            <td>
+                                <a th:href="@{'/parts/delete/'+${part.id}}" class="btn btn-danger">Удалить</a>
                             </td>
 
 

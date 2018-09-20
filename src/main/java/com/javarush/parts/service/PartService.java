@@ -21,4 +21,5 @@ public interface PartService {
     Page<Part> search(String term,  boolean isMust, Pageable pageable);
 
 
+    void delete(Part part);
 }
