@@ -48,9 +48,9 @@
                     <li class="nav-item">
                         <a class="nav-item nav-link" th:href="@{'/parts'}">Список комплектующих</a>
                     </li>
-                    <th:block layout:fragment="newBook"></th:block>
+                    <th:block layout:fragment="newPart"></th:block>
                 </ul>
-                <th:block layout:fragment="actionBook"></th:block>
+                <th:block layout:fragment="actionPart"></th:block>
                 <th:block layout:fragment="searchForm">
                     <form th:replace="fragments/filters :: search('')"></form>
                 </th:block>

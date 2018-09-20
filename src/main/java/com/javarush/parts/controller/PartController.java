@@ -35,7 +35,7 @@ public class PartController {
 
 
     @RequestMapping(path = "")
-    public String viewBooksList (
+    public String viewPartsList (
             @RequestParam(required = false, defaultValue = "1") Integer page,
             @RequestParam(required = false, defaultValue = "id") String sortBy,
             @RequestParam(required = false, defaultValue = "ask") String order,
@@ -128,17 +128,17 @@ public class PartController {
 
     @PostMapping(path = "/edition/{id}")
     public String editionSubmit(
-            @ModelAttribute Part book,
+            @ModelAttribute Part part,
             @PathVariable Long id,
             RedirectAttributes redirectAttributes
     ) throws IOException {
-        partService.update(book, id);
+        partService.update(part, id);
         redirectAttributes.addAttribute("id", id);
         return "redirect:/parts/{id}";
     }
 
     @GetMapping(path = "/delete/{id}")
-    public String deleteBook(@PathVariable Long id){
+    public String deletePart(@PathVariable Long id){
         Optional<Part> part = partService.findById(id);
         if (part.isPresent()) {
 
